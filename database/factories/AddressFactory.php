@@ -19,13 +19,14 @@ class AddressFactory extends Factory
     public function definition()
     {
         return [
-            'address' => fake()->streetAddress(),
+            // 'address' => fake()->streetAddress(),
+            'address' => fake()->streetName(),
             // 'number' => fake()->randomNumber(4),
             'number' => rand(1, 100),
             'complement' => fake()->streetName(),
             'zipcode' => fake()->postcode(),
             'city' => fake()->city(),
-            'state' => fake()->citySuffix(),
+            'state' => fake()->city(),
             'user_id' => fake()->randomElement(User::all()->pluck('id')->toArray()),
         ];
     }

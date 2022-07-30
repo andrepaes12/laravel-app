@@ -41,4 +41,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    // relacionamento User::Address
+    public function addressDelivery()
+    {
+        return $this->hasOne(Address::class, 'user_id', 'id');
+        // em seguida, criar a rota e o seu respectivo controlador
+    }
+
 }
