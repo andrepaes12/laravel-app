@@ -58,9 +58,13 @@ class UserController extends Controller
         //     'content' => 'Teste de comentário do Modelo Usuário'
         // ]);
 
+        // escopo Students by Model
+        $students = User::students()->get();
+        $admins = User::admins()->get();
+
         // retornar uma VIEW com os dados do User
         if ($user){
-            return view('show', ['user' => $user, 'comments' => $comments]);
+            return view('show', ['user' => $user, 'comments' => $comments, 'students' => $students, 'admins' => $admins]);
         } else {
             return view('notfound');
         }

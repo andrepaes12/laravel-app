@@ -48,5 +48,30 @@
     @else
         <h1>Não há posts cadastrados para este usuário.</h1>
     @endif
+
+    {{-- Scope --}}
+    <h1>Lista de Alunos (level <= 5)</h1>
+    @if ($students)
+        <ul>
+        @foreach ($students as $student)
+            <li><h2>Aluno: {{$student->name}} ({{$student->email}})</h2></li>
+        @endforeach
+        </ul>
+    @else
+        <h2>Não há usuários com o nível de "Aluno"</h2>
+    @endif
+    <hr>
+
+    <h1>Lista de Admins (level > 5)</h1>
+    @if ($admins)
+        <ul>
+        @foreach ($admins as $admin)
+            <li><h2>Admin: {{$admin->name}} ({{$admin->email}})</h2></li>
+        @endforeach
+        </ul>
+    @else
+        <h2>Não há usuários com o nível de "Admin"</h2>
+    @endif
+    <hr>
 </body>
 </html>

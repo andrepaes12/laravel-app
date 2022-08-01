@@ -71,4 +71,17 @@ class User extends Authenticatable
         // Relacionamento com Comment; método item do Model Comment
         return $this->morphMany(Comment::class, 'item');
     }
+
+    // Escopo
+    // Students = level <= 5
+    public function scopeStudents($query)
+    {
+        return $query->where('level', '<=', 5);
+    }
+
+    // Admins = level > 5
+    public function scopeAdmins($query)
+    {
+        return $query->where('level', '>', 5);
+    }
 }
