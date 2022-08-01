@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             PostTableSeeder::class,
             CategoryTableSeeder::class,
             PostCategoryTableSeeder::class,
-            CommentTableSeeder::class,
+            // comentar p/ poliformismo
+            // CommentTableSeeder::class,
         ]);
     }
 }

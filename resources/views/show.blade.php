@@ -11,41 +11,42 @@
     <h2>Nome: {{$user->name}}</h2>
     <h2>E-mail: {{$user->email}}</h2>
     <h1>Endereço do Usuário</h1>
-    <h2>
     @php
         // listar o endereço do usuário
         $userAddress = $user->addressDelivery()->get()->first();
-        if ($userAddress){
-            echo "Endereço: {$userAddress->address} - No. {$userAddress->number} - ";
-            echo "Complemento: {$userAddress->complement} - CEP: {$userAddress->zipcode} - ";
-            echo "Cidade: {$userAddress->city} - UF: {$userAddress->state}<br>";
-        } else {
-            echo "Usuário não possui Endereço cadastrado.";
-        }
+    @endphp
+    @if ($userAddress)
+        <h2>Endereço: {{$userAddress->address}} - No. {{$userAddress->number}} -
+        Complemento: {{$userAddress->complement}} - CEP: {{$userAddress->zipcode}} -
+        Cidade: {{$userAddress->city}} - UF: {{$userAddress->state}}</h2>
+    @else
+        Usuário não possui Endereço cadastrado.
+    @endif
 
-        // listar os posts do usuário
-        echo "<h1>Posts do Usuário</h1>";
+    <h1>Posts do Usuário</h1>
+    @php
         // $posts = $user->posts()->orderBy('id', 'DESC')->take(3)->get();
         $posts = $user->posts()->orderBy('id', 'DESC')->get();
-        if ($posts) {
-            foreach ($posts as $post) {
-                echo "#{$post->id} <b>Título:</b> {$post->title}<br>";
-                echo "<b>Subtítulo:</b> {$post->subtitle}<br>";
-                echo "<b>Conteúdo:</b> {$post->description}<br>";
-
-                if ($comments){
-                    foreach ($comments as $comment) {
-                        echo "Comentário by #{$comment->user_id}: {$comment->content}<br>";
-                    }
-                } else {
-                    echo "Não há comentários neste post.";
-                }
-                echo "<small>{$post->slug}</small><br><hr>";
-            }
-        } else {
-            echo "Não há posts cadastrados para o usuário.";
-        }
     @endphp
-    </h2>
+    @if ($posts)
+        @foreach ($posts as $post)
+            <h2>#{{$post->id}} <b>Título:</b> {{$post->title}}</h2>
+            <h2><b>Subtítulo:</b> {{$post->subtitle}}</h2>
+            <h2><b>Conteúdo:</b> {{$post->description}}</h2>
+
+            @if ($comments)
+                @foreach ($comments as $comment)
+                    <h2>Comentário #{{$comment->id}}: {{$comment->content}}</h2>
+                @endforeach
+            @else
+                <h2>Não há comentário neste post.</h2>
+            @endif
+
+            <small>{{$post->slug}}</small>
+            <hr>
+        @endforeach
+    @else
+        <h1>Não há posts cadastrados para este usuário.</h1>
+    @endif
 </body>
 </html>

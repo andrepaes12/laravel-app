@@ -17,6 +17,12 @@
     @foreach ($postCategories as $category)
         <h3>#Id: {{$category->id}} - {{$category->name}}</h3>
     @endforeach
+    @if ($comments)
+        <h1>Comentários</h1>
+        @foreach ($comments as $comment)
+            <h2>Comentário: #{{$comment->id}} {{$comment->content}}</h2>
+        @endforeach
+    @endif
 
     <hr>
 </body>

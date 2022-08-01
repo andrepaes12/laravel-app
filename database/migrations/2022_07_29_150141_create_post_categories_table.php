@@ -22,8 +22,13 @@ return new class extends Migration
             // $table->foreign('post')->references('id')->on('posts')->onDelete('cascade');
             // $table->foreign('category')->references('id')->on('categories')->onDelete('cascade');
 
+            // comentar para fazer o poliformismo
             $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+
+            // poliformismo: item = método
+            // $table->morphs('item');
+
             $table->timestamps();
         });
     }

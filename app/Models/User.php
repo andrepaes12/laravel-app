@@ -64,4 +64,11 @@ class User extends Authenticatable
         //hasManyThrough (1:1:N); Relacionar com comments table; Através da posts table; FK posts->User; FK comments->Post; PK users; PK Post)
         return $this->hasManyThrough(Comment::class, Post::class, 'user_id', 'post_id', 'id', 'id');
     }
+
+    // poliformismo
+    public function comments()
+    {
+        // Relacionamento com Comment; método item do Model Comment
+        return $this->morphMany(Comment::class, 'item');
+    }
 }

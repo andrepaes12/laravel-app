@@ -29,4 +29,11 @@ class Post extends Model
         // belongsToMany (N:N); Model a relacionar (Category); nome da tabela que interliga Post-Category; FK Post; FK Category
         return $this->belongsToMany(Category::class, self::RELATIONSHIP_POST_CATEGORY, 'post_id', 'category_id');
     }
+
+    // poliformismo
+    public function comments()
+    {
+        // Relacionamento com Comment; método item do Model Comment
+        return $this->morphMany(Comment::class, 'item');
+    }
 }

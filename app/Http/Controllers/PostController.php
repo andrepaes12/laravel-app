@@ -48,6 +48,11 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
+        // registro manual de comentário do post
+        // $post->comments()->create([
+        //     'content' => 'Teste de comentário'
+        // ]);
+
         // retornar uma VIEW com os dados do Post
         if ($post){
             //
@@ -58,14 +63,15 @@ class PostController extends Controller
             // $post->categories()->attach(3);
             // $post->categories()->attach([3, 7]);
             // remove o relacionamento na tabela Pivot
-            // $post->categories()->detach(3);
+            // $post->categories()->detach([1, 2, 3, 7]);
             // atualizar o relacionamento mantendo apenas o informado, incluindo/excluindo outros
             // $post->categories()->sync([2, 4, 7]);
             // atualizar o relacionamento incluindo os faltantes sem excluir outros
             // $post->categories()->syncWithoutDetaching([3]);
 
+            $comments = $post->comments()->get();
 
-            return view('showpost', ['post' => $post, 'author' => $author, 'postCategories' => $postCategories]);
+            return view('showpost', ['post' => $post, 'author' => $author, 'postCategories' => $postCategories, 'comments' => $comments]);
         } else {
             return view('notfound');
         }

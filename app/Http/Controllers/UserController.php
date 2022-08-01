@@ -48,7 +48,15 @@ class UserController extends Controller
     {
         // Route->users->UserController
         $user = User::find($id);
-        $comments = $user->commentsOnMyPost()->get();
+        // comentar p/ poliformismo
+        // $comments = $user->commentsOnMyPost()->get();
+        // poliformismo
+        $comments = $user->comments()->get();
+
+        // criar registro manual do comentário p/ Usuário
+        // $user->comments()->create([
+        //     'content' => 'Teste de comentário do Modelo Usuário'
+        // ]);
 
         // retornar uma VIEW com os dados do User
         if ($user){
