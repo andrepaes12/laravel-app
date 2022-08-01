@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,14 +46,11 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
-        // belongsToMany
-        $postCategories = $post->categories()->get();
+        $category = Category::find($id);
+        $posts = $category->posts()->get();
 
-        // retornar uma VIEW com os dados do Post
-        if ($post){
-            $author = $post->author()->get()->first();
-            return view('showpost', ['post' => $post, 'author' => $author, 'postCategories' => $postCategories]);
+        if ($category){
+            return view('showcategory', ['category' => $category, 'posts' => $posts]);
         } else {
             return view('notfound');
         }

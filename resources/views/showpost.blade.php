@@ -13,6 +13,11 @@
     <h3>Conteúdo: {{$post->description}}</h3>
     <h6>{{$post->slug}}</h6>
     <h3>Autor: {{$author->name}} (e-mail: {{$author->email}})</h3>
+    <h3>Catgoria(s):</h3>
+    @foreach ($postCategories as $category)
+        <h3>#Id: {{$category->id}} - {{$category->name}}</h3>
+    @endforeach
+
     <hr>
 </body>
 </html>
