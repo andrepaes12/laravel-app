@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 // rota para o relacionamento User::Address
 Route::resource('users', UserController::class);
 Route::resource('addresses', AddressController::class);
+Route::resource('posts', PostController::class);
 
 Route::get('/', function () {
     return view('welcome');

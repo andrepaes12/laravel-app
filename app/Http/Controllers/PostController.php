@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,18 +46,15 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        // Route->users->UserController
-        $user = User::find($id);
-        $comments = $user->commentsOnMyPost()->get();
+        $post = Post::find($id);
 
-        // retornar uma VIEW com os dados do User
-        if ($user){
-            return view('show', ['user' => $user, 'comments' => $comments]);
+        // retornar uma VIEW com os dados do Post
+        if ($post){
+            $author = $post->author()->get()->first();
+            return view('showpost', ['post' => $post, 'author' => $author]);
         } else {
             return view('notfound');
         }
-
-
     }
 
     /**
