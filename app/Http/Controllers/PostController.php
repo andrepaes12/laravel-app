@@ -47,12 +47,24 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        // belongsToMany
-        $postCategories = $post->categories()->get();
 
         // retornar uma VIEW com os dados do Post
         if ($post){
+            //
             $author = $post->author()->get()->first();
+            // belongsToMany
+            $postCategories = $post->categories()->get();
+            // add relacionamento na tabela Pivot (post_categories)
+            // $post->categories()->attach(3);
+            // $post->categories()->attach([3, 7]);
+            // remove o relacionamento na tabela Pivot
+            // $post->categories()->detach(3);
+            // atualizar o relacionamento mantendo apenas o informado, incluindo/excluindo outros
+            // $post->categories()->sync([2, 4, 7]);
+            // atualizar o relacionamento incluindo os faltantes sem excluir outros
+            // $post->categories()->syncWithoutDetaching([3]);
+
+
             return view('showpost', ['post' => $post, 'author' => $author, 'postCategories' => $postCategories]);
         } else {
             return view('notfound');
