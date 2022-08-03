@@ -11,6 +11,7 @@
     <h2>#{{$post->id}} Título: {{$post->title}}</h2>
     <h3>Subtítulo: {{$post->subtitle}}</h3>
     <h3>Conteúdo: {{$post->description}}</h3>
+    <h3>Data da criação: {{$post->created_fmt}}</h3>
     <h6>{{$post->slug}}</h6>
     <h3>Autor: {{$author->name}} (e-mail: {{$author->email}})</h3>
     <h3>Catgoria(s):</h3>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -35,5 +36,19 @@ class Post extends Model
     {
         // Relacionamento com Comment; método item do Model Comment
         return $this->morphMany(Comment::class, 'item');
+    }
+
+    // Mutator: método a ser usado quando for invocado pelo controlador / view
+    // neste caso está formatando a data do campo created_at
+    public function getCreatedFmtAttribute()
+    {
+        return date('d/m/Y H:i', strtotime($this->created_at));
+    }
+
+    // Accessor
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
     }
 }

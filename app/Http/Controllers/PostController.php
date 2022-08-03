@@ -71,6 +71,12 @@ class PostController extends Controller
 
             $comments = $post->comments()->get();
 
+            // setTitleAttibute()
+            // redefinir o valor dos campos title e slug da table posts (rota: //posts/id)
+            // $post->title = 'Título de teste do artigo!';
+            // $post->save();
+
+
             return view('showpost', ['post' => $post, 'author' => $author, 'postCategories' => $postCategories, 'comments' => $comments]);
         } else {
             return view('notfound');
