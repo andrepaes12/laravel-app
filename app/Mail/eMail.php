@@ -29,7 +29,7 @@ class eMail extends Mailable
     public function build()
     {
         $this->subject('Assunto do email');
-        $this->to('aluispaes@gmail.com', 'Andre Paes');
+        $this->to('destiny@mail.com', 'Mr Destiny');
         return $this->view('mail');
     }
 }
